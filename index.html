@@ -59,7 +59,8 @@
 
         const source = new EventSource("/convert-update");
         source.addEventListener("message", e => {
-          resultInput.value = e.data.result;
+          const data = JSON.parse(e.data);
+          resultInput.value = data.result;
         });
 
         const form = document.querySelector("#form");

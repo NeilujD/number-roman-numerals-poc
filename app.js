@@ -1,4 +1,5 @@
 import express from 'express';
+import redis from 'redis';
 import { join, dirname } from 'path';
 import { toRoman } from './convert.js';
 import { fileURLToPath } from 'url';
@@ -30,8 +31,31 @@ app.get('/convert', async (req, res) => {
   }
 
   const result = await toRoman(req.query.number);
-  res.json({result});
+  
+  const subscriber = redis.createClient();
+  subscriber.publish("update", result);
+
+  res.json({success: true});
 });
+
+app.get('/convert-update', (req, res) => {
+  const subscriber = redis.createClient();
+
+  subscriber.subscribe("update");
+
+  subscriber.on("message", (chanel, result) => {
+    res.write(`data: ${JSON.stringify({result})}\n\n`);
+  });
+
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.flushHeaders();
+
+  res.on('close', () => {
+    res.end();
+  });
+})
 
 app.listen(port, () => console.log(`App listening on port ${port} !`));
 
