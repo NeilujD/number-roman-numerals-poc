@@ -55,6 +55,13 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', (event) => {
+        const resultInput = document.querySelector("#result");
+
+        const source = new EventSource("/convert-update");
+        source.addEventListener("message", e => {
+          resultInput.value = e.data.result;
+        });
+
         const form = document.querySelector("#form");
 
         form.addEventListener("submit", async e => {
@@ -62,13 +69,11 @@
           let number = document.querySelector("#number").value;
 
           try {
-            const response = await (await fetch(`/convert?number=${number}`, {
+            fetch(`/convert?number=${number}`, {
               headers: {"Content-Type": "application/json"}
-            })).json();
-            let resultInput = document.querySelector("#result");
-            resultInput.value = response.result;
+            });
           } catch (e) {
-            alert("There have occured an error !");
+            alert("An error has occured !");
           }
 
           return false;
