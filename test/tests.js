@@ -2,6 +2,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import assert from 'assert';
+import EventSource from 'eventsource';
+import http from "http";
 
 import app from '../app.js';
 import { toRoman, getRomanNumeral } from '../convert.js';
@@ -39,6 +41,23 @@ describe("Convert to roman numerals", () => {
             res.body.success.should.be.true;
             done();
           });
+    });
+  });
+
+  describe("/convert-update SSE", () => {
+    it("should subscribe to the `/convert-update` SSE", (done) => {
+      const number = 123;
+      const numerals = "CXXIII";
+
+      const source = new EventSource("http://localhost:3000/convert-update");
+
+      source.addEventListener("message", e => {
+        const data = JSON.parse(e.data);
+        assert.equal(data.result, numerals);
+        done();
+      });
+
+      http.get(`http://localhost:3000/convert?number=${number}`);
     });
   });
 

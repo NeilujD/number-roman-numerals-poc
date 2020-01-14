@@ -26,6 +26,13 @@ npm start
 ```
 
 # Test
+Make sure redis is running to test correctly.
+
 ```bash
 npm test
 ```
+
+# TODO
+* Fix the `/convert-update SSE` test (random timeout issue)
+* Make UI better (style mostly)
+* Make UX better (loading animation)
