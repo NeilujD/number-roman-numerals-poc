@@ -6,6 +6,8 @@ POC that permit to convert a number to roman numerals using express on server si
 
 1. Installation
 ```bash
+git clone git@github.com:NeilujD/number-roman-numerals-poc.git
+cd number-roman-numerals-poc
 npm install
 ```
 
