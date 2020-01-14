@@ -1,0 +1,31 @@
+{
+  "name": "toromannumber",
+  "version": "1.0.0",
+  "description": "POC that permit to launch express server with roman numerals converter function",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "./node_modules/eslint/bin/eslint.js ./*.js",
+    "test": "mocha --require esm --exit",
+    "start": "node --experimental-modules app.js"
+  },
+  "keywords": [
+    "roman",
+    "numerals"
+  ],
+  "author": "NeilujD",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.8.0",
+    "esm": "^3.2.25",
+    "mocha": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}
