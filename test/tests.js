@@ -31,12 +31,12 @@ describe("Convert to roman numerals", () => {
           });
     });
 
-    it("should return roman numerals as a string", done => {
+    it("should return a successful response", done => {
       chai.request(app)
           .get('/convert?number=123')
           .end((err, res) => {
             res.should.have.status(200);
-            res.body.result.should.be.equal("CXXIII");
+            res.body.success.should.be.true;
             done();
           });
     });
