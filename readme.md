@@ -20,3 +20,7 @@ npm run start
 ```bash
 npm test
 ```
+
+# TODO
+* Make UI better (style mostly)
+* Make UX better (loading animation)
