@@ -28,5 +28,16 @@
   },
   "engines": {
     "node": ">=12"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeilujD/number-roman-numerals-poc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NeilujD/number-roman-numerals-poc/issues"
+  },
+  "homepage": "https://github.com/NeilujD/number-roman-numerals-poc#readme"
 }
