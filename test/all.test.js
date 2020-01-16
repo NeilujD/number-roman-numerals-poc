@@ -43,27 +43,24 @@ describe("Convert to roman numerals", () => {
   });
 
   describe("toRoman", () => {
-    it("should return a roman number", done => {
-      toRoman(123).then(result => {
-        assert.equal(result, "CXXIII");
-        done();
-      });
+    it("should return a roman number", async () => {
+      const result = await toRoman(123);
+      assert.equal(result, "CXXIII");
     });
 
-    it("should return an error when the parameter value is not between 1 and 4999", done => {
-      toRoman(5000).catch(e => {
+    it("should return an error when the parameter value is not between 1 and 4999", async () => {
+      try {
+        await toRoman(5000)
+      } catch (e) {
         assert.equal(e, "bad_parameter_value");
-        done();
-      });
+      }
     });
   });
 
   describe("getRomanNumeral", () => {
-    it("should return a roman numeral", done => {
-      getRomanNumeral(2, 1).then(result => {
-        assert.equal(result, "XX");
-        done();
-      })
-    })
+    it("should return a roman numeral", async () => {
+      const result = await getRomanNumeral(2, 1);
+      assert.equal(result, "XX");
+    });
   });
 });
